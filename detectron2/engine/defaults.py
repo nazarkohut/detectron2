@@ -315,6 +315,8 @@ class DefaultPredictor:
             image = torch.as_tensor(image.astype("float32").transpose(2, 0, 1))
             image.to(self.cfg.MODEL.DEVICE)
 
+            print(f"self.cfg.MODEL.DEVICE: {self.cfg.MODEL.DEVICE}")
+            
             inputs = {"image": image, "height": height, "width": width}
             start_time = time.time()
             predictions = self.model([inputs])[0]
