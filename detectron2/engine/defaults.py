@@ -13,6 +13,7 @@ import argparse
 import logging
 import os
 import sys
+import time
 import weakref
 from collections import OrderedDict
 from typing import Optional
@@ -315,9 +316,10 @@ class DefaultPredictor:
             image.to(self.cfg.MODEL.DEVICE)
 
             inputs = {"image": image, "height": height, "width": width}
-
+            start_time = time.time()
             predictions = self.model([inputs])[0]
-            return predictions
+            end_time = time.time()
+            return predictions, end_time - start_time
 
 
 class DefaultTrainer(TrainerBase):
